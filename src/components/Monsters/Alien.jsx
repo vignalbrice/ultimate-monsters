@@ -5,17 +5,14 @@ Command: npx gltfjsx@6.1.4 public/models/Alien.gltf --output src/components/Alie
 
 import React, { useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { useEffect } from "react";
+import useAnimationOnHover from "../../hooks/useAnimationOnHover";
 
-export function Alien({ hovered, ...props }) {
+export function Alien({ hovered, Animations, ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/models/Alien.gltf");
   const { actions } = useAnimations(animations, group);
-  useEffect(() => {
-    const anim = hovered ? "Punch" : "Idle";
-    actions[anim].reset().fadeIn(0.5).play();
-    return () => actions[anim]?.fadeOut(0.5);
-  }, [hovered]);
+  const anim = hovered ? Animations.Punch : Animations.Idle;
+  useAnimationOnHover(actions, anim);
 
   return (
     <group ref={group} {...props} dispose={null}>

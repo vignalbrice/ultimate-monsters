@@ -1,15 +1,11 @@
-import {
-  CameraControls,
-  Environment,
-  Text,
-  useCursor,
-} from "@react-three/drei";
+import { CameraControls, Environment, useCursor } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Fragment, useEffect } from "react";
 import { useRef, useState } from "react";
 import * as THREE from "three";
 import { monsters } from "../data/monsters";
 import Portal from "./Portal/Portal";
+import Title from "./Title/Title";
 
 export const Experience = () => {
   /* Experience Component - Render a sphere geometry with a texture map
@@ -48,7 +44,7 @@ export const Experience = () => {
   return (
     <Fragment>
       <ambientLight intensity={0.5} />
-      <Environment preset="sunset" />
+      <Environment preset="studio" />
       <CameraControls
         ref={controlsRef}
         maxPolarAngle={Math.PI / 2}
@@ -58,33 +54,28 @@ export const Experience = () => {
         maxAzimuthAngle={Math.PI / 2.5}
         maxDistance={10}
       />
-      <Text
-        font="fonts/Caprasimo/Caprasimo-Regular.ttf"
-        fontSize={0.3}
-        position={[0, 2.1, 0.051]}
-        anchorY={"top"}
-      >
-        ULTIMATE MONSTERS
-        <meshBasicMaterial color={"#333"} toneMapped={false} />
-      </Text>
-      {monsters.map(({ Monster, ...m }, i) => {
-        return (
-          <Portal
-            texture={m.texture}
-            name={m.name}
-            color={m.color}
-            active={active}
-            setActive={setActive}
-            hovered={hovered}
-            setHovered={setHovered}
-            position-x={m.positionX}
-            rotation-y={m.rotationY}
-            key={i}
-          >
-            <Monster scale={0.6} position-y={-1} hovered={hovered === m.name} />
-          </Portal>
-        );
-      })}
+      <Title>ULTIMATE MONSTERS</Title>
+      {monsters.map(({ Monster, ...m }, i) => (
+        <Portal
+          texture={m.texture}
+          name={m.name}
+          color={m.color}
+          active={active}
+          setActive={setActive}
+          hovered={hovered}
+          setHovered={setHovered}
+          position-x={m.positionX}
+          rotation-y={m.rotationY}
+          key={i}
+        >
+          <Monster
+            scale={0.6}
+            position-y={-1}
+            hovered={hovered === m.name}
+            Animations={m.Animations}
+          />
+        </Portal>
+      ))}
     </Fragment>
   );
 };

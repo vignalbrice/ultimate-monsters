@@ -8,6 +8,10 @@ export const monsters = [
     color: "#9e4176",
     texture: "textures/anime_cactus_world.jpg",
     Monster: Alien,
+    Animations: {
+      Punch: "Punch",
+      Idle: "Idle",
+    },
   },
   {
     name: "Dragon",
@@ -16,6 +20,10 @@ export const monsters = [
     positionX: -2.5,
     rotationY: Math.PI / 8,
     Monster: Dragon,
+    Animations: {
+      Heatbutt: "Headbutt",
+      FlyingIdle: "Flying_Idle",
+    },
   },
   {
     name: "Cactoro",
@@ -24,5 +32,9 @@ export const monsters = [
     positionX: 2.5,
     rotationY: -Math.PI / 8,
     Monster: Cactoro,
+    Animations: {
+      Wave: "Wave",
+      Idle: "Idle",
+    },
   },
 ];
